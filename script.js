@@ -88,8 +88,10 @@ window.editTournament = async function (id) {
     const newName = prompt("Enter new match name:", data.name);
     const newFee = prompt("Enter new fee:", data.fee);
     const newSlots = prompt("Enter slots:", data.slots);
+    const newTime = prompt("Enter new start time (YYYY-MM-DDTHH:MM):", data.time);
+    const newNotice = prompt("Enter new notice:", data.notice);
 
-    if (!newName || !newFee || !newSlots) {
+    if (!newName || !newFee || !newSlots || !newTime) {
         alert("Update cancelled ❌");
         return;
     }
@@ -97,7 +99,9 @@ window.editTournament = async function (id) {
         await updateDoc(docRef, {
             name: newName,
             fee: Number(newFee),
-            slots: Number(newSlots)
+            slots: Number(newSlots),
+            time: newTime,
+            notice: newNotice
         });
 
         alert("Updated successfully ✏️");
@@ -131,9 +135,8 @@ querySnapshot.forEach((docSnap, index) => {
     
         const data = docSnap.data();
         const id = docSnap.id;
-
         const matchTime = data.time ? new Date(data.time) : null;
-
+        const noticeText = data.notice ? data.notice : "No updates for this match";
 let formattedTime = "Not set";
 
 if (matchTime) {
@@ -157,13 +160,21 @@ if (matchTime) {
         }
 
        container.innerHTML += `
-    <div class="card" style="animation-delay:${index * 0.1}s">
+        <div class="card" style="animation-delay:${index * 0.1}s">
         <h3>🎮 ${data.name}</h3>
        <p><strong>💰 Entry Fee:</strong> ₹${data.fee || 0}</p>
-<p><strong>👥 Slots Left:</strong> ${data.slots || 0}</p>
-<p><strong>⏰ Start:</strong> ${formattedTime}</p>
+       <p><strong>👥 Slots Left:</strong> ${data.slots || 0}</p>
+       <p><strong>⏰ Start:</strong> ${formattedTime}</p>
+   <div class="notice-box">
+            📢 ${noticeText}
+        </div>
 
-        <button onclick="joinMatch('${id}')">Join</button>
+       <button onclick="showRoomInCard('${id}')">Join</button>
+
+<div id="room-${id}" class="room-box" style="display:none;">
+    <p><strong>ID:</strong> <span id="id-${id}"></span></p>
+    <p><strong>Password:</strong> <span id="pass-${id}"></span></p>
+</div>
 
         ${
             auth.currentUser && auth.currentUser.email === ADMIN_EMAIL
@@ -322,6 +333,7 @@ window.addTournament = async function () {
     const password = document.getElementById("adminPassword").value;
     const slots = document.getElementById("adminSlots").value;
     const time = document.getElementById("adminTime").value;
+    const notice = document.getElementById("adminNotice").value;
 
     if (!name || !fee || !roomId || !password || !slots) {
         alert("Fill all fields ❌");
@@ -335,7 +347,8 @@ window.addTournament = async function () {
     roomId: roomId,
     password: password,
     slots: Number(slots),
-    time: time   // ✅ ADD THIS
+    time: time,
+    notice: notice   // ✅ ADD THIS
 });
 
         alert("Tournament Added Successfully ✅");
@@ -398,4 +411,23 @@ window.logout = function () {
         .catch(err => {
             alert("Logout failed ❌");
         });
+};
+
+window.showRoomInCard = async function (id) {
+
+    if (!auth.currentUser) {
+        alert("Please login first ❌");
+        return;
+    }
+
+    const docRef = doc(db, "tournaments", id);
+    const docSnap = await getDoc(docRef);
+    const data = docSnap.data();
+
+    // show values
+    document.getElementById(`id-${id}`).innerText = data.roomId;
+    document.getElementById(`pass-${id}`).innerText = data.password;
+
+    // show div
+    document.getElementById(`room-${id}`).style.display = "block";
 };

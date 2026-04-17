@@ -480,3 +480,86 @@ input {
     0% { background-position: -200% 0; }
     100% { background-position: 200% 0; }
 }
+
+
+/* INFO SECTION */
+.info-section {
+    margin-top: 60px;
+    text-align: center;
+}
+
+.info-section h2 {
+    font-family: 'Orbitron', sans-serif;
+    color: #22c55e;
+    text-shadow: 0 0 15px #22c55e;
+}
+
+.info-box {
+    margin: 25px auto;
+    padding: 25px;
+    width: 350px;
+    background: rgba(15, 23, 42, 0.8);
+    border: 1px solid #22c55e55;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 20px #22c55e22;
+}
+
+.info-box p {
+    margin: 8px 0;
+    color: #ccc;
+    font-size: 14px;
+}
+
+.info-box h3 {
+    margin-top: 15px;
+    color: #22c55e;
+}
+
+.info-box hr {
+    border: 0;
+    height: 1px;
+    background: #22c55e33;
+    margin: 15px 0;
+}
+
+.warning {
+    margin-top: 15px;
+    color: #f87171;
+    font-weight: bold;
+}
+
+.room-box {
+    margin-top: 10px;
+    padding: 10px;
+    background: #020617;
+    border: 1px solid #22c55e55;
+    border-radius: 8px;
+    color: #ccc;
+    font-size: 13px;
+}
+#admin textarea {
+    width: 250px;
+    height: 80px;
+    margin: 10px 0;
+    padding: 10px;
+    background: #020617;
+    border: 1px solid #22c55e;
+    color: white;
+    border-radius: 5px;
+}
+
+.card p strong {
+    color: #22c55e;
+}
+
+.card p {
+    line-height: 1.4;
+}
+.notice-box {
+    margin-top: 10px;
+    padding: 10px;
+    background: #020617;
+    border-left: 3px solid #22c55e;
+    font-size: 13px;
+}
