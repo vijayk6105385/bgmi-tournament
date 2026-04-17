@@ -40,7 +40,7 @@
     <input type="text" id="adminPassword" placeholder="Password">
     <input type="number" id="adminSlots" placeholder="Slots">
     <input type="datetime-local" id="adminTime">
-
+    <textarea id="adminNotice" placeholder="Enter match notice (rules, info, etc)"></textarea>
     <button class="submit" onclick="addTournament()">Add Tournament</button>
 </section>
 
@@ -121,6 +121,47 @@
         </div>
 
     </div>
+     <div class="info-section">
+
+        <h2>🎮 Daily BGMI Matches</h2>
+
+        <div class="info-box">
+
+            <p>We host 3 exciting matches every day:</p>
+
+            <p>🥇 Solo Match — 6:00 PM</p>
+            <p>🥈 Duo Match — 6:50 PM</p>
+            <p>🥉 Squad Match — 7:40 PM</p>
+
+            <hr>
+
+            <h3>💸 Paid Matches Prize Pool</h3>
+            <p>Solo — Up to ₹500</p>
+            <p>Duo — Up to ₹1000</p>
+            <p>Squad — Up to ₹2000</p>
+
+            <hr>
+
+            <h3>🎁 Free Matches</h3>
+            <p>Each match has a ₹100 prize pool</p>
+
+            <hr>
+
+            <h3>⏰ Match Details</h3>
+            <p>
+                Room ID & Password will be available on the website <br>
+                10 minutes before the match.<br>
+                Click on <strong>"Join"</strong> to view details.
+            </p>
+
+            <p class="warning">⚠️ Fair Play Only | No Hacks Allowed</p>
+            <button onclick="showSection('tournaments')" class="main-btn">
+    🎮 Join Now
+</button>
+        </div>
+
+    </div>
+
 </section>
 
 
